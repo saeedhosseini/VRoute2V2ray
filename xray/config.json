@@ -1,0 +1,22 @@
+{
+  "log": { "loglevel": "warning" },
+  "inbounds": [
+    {
+      "listen": "0.0.0.0",
+      "port": 8443,
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          { "id": "6f9d7d2a-9c8c-4d29-9cf2-9f1b5b0a3a01", "alterId": 0 }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "none"
+      }
+    }
+  ],
+  "outbounds": [
+    { "protocol": "freedom", "settings": {} }
+  ]
+}

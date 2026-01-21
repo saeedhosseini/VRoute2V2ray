@@ -1,0 +1,24 @@
+services:
+  openvpn:
+    image: dperson/openvpn-client
+    container_name: ovpn_client
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun
+    volumes:
+      - ./ovpn:/vpn
+    entrypoint: ["/usr/sbin/openvpn"]
+    command: ["--config", "/vpn/ACTIVE.ovpn", "--auth-user-pass", "/vpn/auth.txt", "--verb", "3"]
+    restart: unless-stopped
+    ports:
+      - "8443:8443"
+
+  xray:
+    image: teddysun/xray
+    container_name: xray_server
+    network_mode: "service:openvpn"
+    volumes:
+      - ./xray:/etc/xray
+    restart: unless-stopped
+
